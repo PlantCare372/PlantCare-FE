@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../../constants.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
+import '../../../notification_service.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -20,7 +19,9 @@ class FeaturedPlants extends StatelessWidget {
         children: <Widget>[
           FeaturePlantCard(
             image: "assets/images/bottom_img_1.png",
-            press: () {},
+            press: () async {
+              await NotificationService().scheduleNotification();
+            },
           ),
           FeaturePlantCard(
             image: "assets/images/bottom_img_2.png",
@@ -63,29 +64,5 @@ class FeaturePlantCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void scheduledAlarm() {
-    tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation("Etc/UTC"));
-    var scheduledNotificationDateTime =
-        DateTime.now().add(Duration(seconds: 10));
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'alarm_notif', 'alarm_notif', 'channel for alarm notifications',
-        icon: 'app_icon', largeIcon: DrawableResourceAndroidBitmap('app_icon'));
-    var iosPlatformChannelSpecifics = IOSNotificationDetails(
-        presentAlert: true, presentBadge: true, presentSound: true);
-    var platformSpecific = NotificationDetails();
-    flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'scheduled title',
-        'scheduled body',
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
-        const NotificationDetails(
-            android: AndroidNotificationDetails('your channel id',
-                'your channel name', 'your channel description')),
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }
