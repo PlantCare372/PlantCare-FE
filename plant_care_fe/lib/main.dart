@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
@@ -7,6 +8,7 @@ import 'notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await NotificationService().init(); // <----
   runApp(MyApp());
 }
