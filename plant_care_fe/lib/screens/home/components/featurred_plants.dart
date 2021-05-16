@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../../constants.dart';
 import '../../../notification_service.dart';
+import '../../reminder/reminder_screen.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -19,8 +20,9 @@ class FeaturedPlants extends StatelessWidget {
         children: <Widget>[
           FeaturePlantCard(
             image: "assets/images/bottom_img_1.png",
-            press: () async {
-              await NotificationService().scheduleNotification();
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ReminderScreen()));
             },
           ),
           FeaturePlantCard(
