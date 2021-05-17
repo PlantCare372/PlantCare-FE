@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_app/notification_service.dart';
 
 class ReminderScreen extends StatelessWidget {
   @override
@@ -9,10 +10,10 @@ class ReminderScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
+          onPressed: () async {
+            await NotificationService().scheduleNotification();
           },
-          child: Text('Go back!'),
+          child: Text('Test Notification!'),
         ),
       ),
     );

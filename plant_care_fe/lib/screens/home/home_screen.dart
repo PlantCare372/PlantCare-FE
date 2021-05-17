@@ -1,14 +1,27 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:plant_app/components/my_bottom_nav_bar.dart';
 import 'package:plant_app/screens/home/components/body.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:plant_app/screens/camera/take_picture_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: AppBar(elevation: 0, actions: <Widget>[
+        IconButton(
+            icon: Icon(Icons.camera_alt_rounded),
+            onPressed: () async {
+              WidgetsFlutterBinding.ensureInitialized();
+              final cameras = await availableCameras();
+              final firstCamera = cameras.first;
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          TakePictureScreen(camera: firstCamera)));
+            })
+      ]),
       body: Body(),
       bottomNavigationBar: MyBottomNavBar(),
       drawer: SafeArea(
@@ -73,12 +86,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar buildAppBar() {
-    return AppBar(
-      elevation: 0,
     );
   }
 }

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
+>>>>>>> 0741f05 (add camera)
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
 import 'package:plant_app/screens/home/home_screen.dart';
@@ -6,6 +11,7 @@ import 'notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await NotificationService().init(); // <----
   runApp(MyApp());
 }
