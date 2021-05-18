@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
+import '../../recommend_list/recommend_list_screen.dart';
+
 class TitleWithMoreBtn extends StatelessWidget {
   const TitleWithMoreBtn({
     Key key,
@@ -24,7 +26,12 @@ class TitleWithMoreBtn extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             color: kPrimaryColor,
-            onPressed: press,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RecommendListScreen()));
+            },
             child: Text(
               "More",
               style: TextStyle(color: Colors.white),
