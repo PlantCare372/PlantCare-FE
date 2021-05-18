@@ -13,7 +13,7 @@ class CustomDialog extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.only(
-            top: 100,
+            top: 50,
             bottom: 20,
             left: 20,
             right: 20,
@@ -65,12 +65,6 @@ class CustomDialog extends StatelessWidget {
           right: 20,
           child: Stack(
             children: <Widget>[
-              Container(
-                child: CircleAvatar(
-                  backgroundColor: Colors.lightGreen,
-                  radius: 50,
-                )
-              ),
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
