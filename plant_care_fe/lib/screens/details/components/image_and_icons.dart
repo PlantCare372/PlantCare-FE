@@ -110,7 +110,7 @@ class ImageAndIcons extends StatelessWidget {
                 ],
                 image: DecorationImage(
                   alignment: Alignment.centerLeft,
-                  fit: BoxFit.cover,
+                  centerSlice: Rect.largest,
                   image: AssetImage(image),
                 ),
               ),
