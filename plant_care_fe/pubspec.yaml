@@ -30,6 +30,9 @@ dependencies:
   flutter_svg: ^0.19.1 #it helps us to use SVG
   flutter_local_notifications: ^5.0.0+4
   flutter_advanced_drawer: ^1.1.0
+  camera: ^0.8.1
+  path_provider: ^2.0.1
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:
