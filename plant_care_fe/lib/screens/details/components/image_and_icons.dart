@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:plant_app/screens/properties/properties.dart';
 
 import '../../../constants.dart';
 import 'icon_card.dart';
@@ -38,10 +39,54 @@ class ImageAndIcons extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    IconCard(icon: "assets/icons/sun.svg"),
-                    IconCard(icon: "assets/icons/icon_2.svg"),
-                    IconCard(icon: "assets/icons/icon_3.svg"),
-                    IconCard(icon: "assets/icons/icon_4.svg"),
+                    IconButton(
+                      icon: SvgPicture.asset("assets/icons/sun.svg"),
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (context) => CustomDialog(
+                            title: "Light",
+                            des: "Description",
+                          ),
+                        );
+                      },
+                      ),
+                    IconButton(
+                      icon: SvgPicture.asset("assets/icons/icon_2.svg"),
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (context) => CustomDialog(
+                            title: "Temperature",
+                            des: "Description",
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: SvgPicture.asset("assets/icons/icon_3.svg"),
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (context) => CustomDialog(
+                            title: "Humidity",
+                            des: "Description",
+                          ),
+                        );
+                      },
+                    ),
+                     IconButton(
+                      icon: SvgPicture.asset("assets/icons/icon_4.svg"),
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (context) => CustomDialog(
+                            title: "Wind",
+                            des: "Description",
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
