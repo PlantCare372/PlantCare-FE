@@ -8,10 +8,12 @@ import 'icon_card.dart';
 class ImageAndIcons extends StatelessWidget {
   const ImageAndIcons({
     Key key,
+    this.image,
     @required this.size,
   }) : super(key: key);
 
   final Size size;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class ImageAndIcons extends StatelessWidget {
                     Spacer(),
                     IconButton(
                       icon: SvgPicture.asset("assets/icons/sun.svg"),
-                      onPressed: (){
+                      onPressed: () {
                         showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -50,10 +52,10 @@ class ImageAndIcons extends StatelessWidget {
                           ),
                         );
                       },
-                      ),
+                    ),
                     IconButton(
                       icon: SvgPicture.asset("assets/icons/icon_2.svg"),
-                      onPressed: (){
+                      onPressed: () {
                         showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -65,7 +67,7 @@ class ImageAndIcons extends StatelessWidget {
                     ),
                     IconButton(
                       icon: SvgPicture.asset("assets/icons/icon_3.svg"),
-                      onPressed: (){
+                      onPressed: () {
                         showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -75,9 +77,9 @@ class ImageAndIcons extends StatelessWidget {
                         );
                       },
                     ),
-                     IconButton(
+                    IconButton(
                       icon: SvgPicture.asset("assets/icons/icon_4.svg"),
-                      onPressed: (){
+                      onPressed: () {
                         showDialog(
                           context: context,
                           builder: (context) => CustomDialog(
@@ -108,8 +110,8 @@ class ImageAndIcons extends StatelessWidget {
                 ],
                 image: DecorationImage(
                   alignment: Alignment.centerLeft,
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/img.png"),
+                  centerSlice: Rect.largest,
+                  image: AssetImage(image),
                 ),
               ),
             ),
