@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
 import '../../recommend_list/recommend_list_screen.dart';
+import '../../yourplantlist/yourplantlist.dart';
 
 class TitleWithMoreBtn extends StatelessWidget {
   const TitleWithMoreBtn({
@@ -31,6 +32,43 @@ class TitleWithMoreBtn extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => RecommendListScreen()));
+            },
+            child: Text(
+              "More",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TitleWithMoreBtn_YPL extends StatelessWidget {
+  const TitleWithMoreBtn_YPL({
+    Key key,
+    this.title,
+  }) : super(key: key);
+  final String title;
+
+  @override 
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: Row(
+        children: <Widget>[
+          TitleWithCustomUnderline(text: title),
+          Spacer(),
+          FlatButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            color: kPrimaryColor,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => YourPlantScreen()));
             },
             child: Text(
               "More",
