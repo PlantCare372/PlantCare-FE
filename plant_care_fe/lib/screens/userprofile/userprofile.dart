@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
 
-import '../userinfo/components/body.dart';
+import '../userprofile/components/body.dart';
 
-class UserInfo extends StatelessWidget {
+class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
