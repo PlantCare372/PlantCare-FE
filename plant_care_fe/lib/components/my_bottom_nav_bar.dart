@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants.dart';
 import 'package:plant_app/screens/userinfo/userinfo.dart';
+import 'package:plant_app/screens/favorite/nextscreen.dart';
 
 class MyBottomNavBar extends StatelessWidget {
   const MyBottomNavBar({
@@ -37,7 +38,11 @@ class MyBottomNavBar extends StatelessWidget {
           ),
           IconButton(
             icon: SvgPicture.asset("assets/icons/heart-icon.svg"),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, 
+              MaterialPageRoute(builder: (context) => NextScreen()),
+              );
+            },
           ),
           IconButton(
             icon: SvgPicture.asset("assets/icons/user-icon.svg"),

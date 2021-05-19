@@ -4,6 +4,7 @@ import 'package:plant_app/components/my_bottom_nav_bar.dart';
 import 'package:plant_app/screens/home/components/body.dart';
 import 'package:plant_app/screens/camera/take_picture_screen.dart';
 
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,8 @@ class HomeScreen extends StatelessWidget {
                   title: Text('Profile'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                  },
                   leading: Icon(Icons.favorite),
                   title: Text('Favourites'),
                 ),
