@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
 
 class CustomDialog extends StatelessWidget {
-  final String title, des, buttonText;
+  final String title, des;
   final Image image;
 
-  CustomDialog({this.title, this.des, this.buttonText, this.image});
+  CustomDialog({this.title, this.des, this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CustomDialog extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.only(
-            top: 50,
+            top: 20,
             bottom: 20,
             left: 20,
             right: 20,
