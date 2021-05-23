@@ -34,6 +34,7 @@ class _DescriptionState extends State<Description> {
     return Stack(
       children: <Widget>[
         Container(
+          width: MediaQuery.of(context).size.width,
           height: 700.0,
           padding: EdgeInsets.only(
               left: Constants.padding,
