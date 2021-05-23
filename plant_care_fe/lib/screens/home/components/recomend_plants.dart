@@ -72,7 +72,7 @@ class RecommendsPlants extends StatelessWidget {
                         ),
                         ),
                         Text(
-                          listRes_recommend[index]['country'].toString(),
+                          listRes_recommend[index]['country'] == null ? 'No country found' : listRes_recommend[index]['country'].toString(),
                           textAlign: TextAlign.left,
                           style: TextStyle(
                           color: kPrimaryColor.withOpacity(0.8),
