@@ -12,6 +12,7 @@ class RecommendListScreen extends State<Recommend> {
   List listRes;
   Image image;
 
+
   Future fetchData() async{
     Response res = await get(
       Uri.parse('http://178.128.127.43/api/v1/plants/?skip=0&limit=100'),
@@ -45,7 +46,7 @@ class RecommendListScreen extends State<Recommend> {
         body: listRes == null? Container() : GridView.builder(
           itemCount: listRes.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+            crossAxisCount: 2,
           ),
           itemBuilder: (context, index){
             return Container(
@@ -69,7 +70,7 @@ class RecommendListScreen extends State<Recommend> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DetailsScreen(
-                  id: listRes[index]['id'],
+                  id: listRes[index]['id'].toString(),
                 )
               ),
               );
@@ -103,7 +104,7 @@ class RecommendListScreen extends State<Recommend> {
                         ),
                         ),
                         Text(
-                          listRes[index]['country'].toString(),
+                          listRes[index]['country'] == null? 'No country found' : listRes[index]['country'].toString(),
                           textAlign: TextAlign.left,
                           style: TextStyle(
                           color: kPrimaryColor.withOpacity(0.5),
@@ -114,7 +115,7 @@ class RecommendListScreen extends State<Recommend> {
                     ),
                   Spacer(),
                   Text(
-                    listRes[index]['price'].toString(),
+                    listRes[index]['price']== null? "\$0" : "\$" + listRes[index]['price'].toString(),
                     style: Theme.of(context)
                         .textTheme
                         .button

@@ -10,7 +10,7 @@ class RecommendsPlants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return listRes_recommend == null? Container() :GridView.builder(
+    return listRes_recommend == null? Container() : GridView.builder(
           itemCount: 5,
           scrollDirection: Axis.horizontal,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -75,7 +75,7 @@ class RecommendsPlants extends StatelessWidget {
                           listRes_recommend[index]['country'].toString(),
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                          color: kPrimaryColor.withOpacity(0.5),
+                          color: kPrimaryColor.withOpacity(0.8),
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -83,7 +83,7 @@ class RecommendsPlants extends StatelessWidget {
                     ),
                   Spacer(),
                   Text(
-                    listRes_recommend[index]['price'].toString(),
+                    listRes_recommend[index]['price'] == null? "\$0" : "\$" + listRes_recommend[index]['price'].toString(),
                     style: Theme.of(context)
                         .textTheme
                         .button

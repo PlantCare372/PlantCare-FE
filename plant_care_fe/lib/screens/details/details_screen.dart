@@ -54,7 +54,10 @@ class DetailsState extends State<DetailsScreen>{
             image: listRes['image'] == null? 'assets/images/blank-tree.png' : listRes['image'].toString(),
           ),
           TitleAndPrice(
-              title: listRes['name'].toString(), country: listRes['country'].toString(), price: listRes['price']),
+              title: listRes['name'].toString(),
+              country: listRes['country'] == null ? 'No country found' : listRes['country'].toString(),
+              price: listRes['price'] == null? 0 : listRes['price'],
+              ),
           SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
