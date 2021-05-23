@@ -31,7 +31,7 @@ class TitleWithMoreBtn extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => RecommendListScreen()));
+                      builder: (context) => Recommend()));
             },
             child: Text(
               "More",

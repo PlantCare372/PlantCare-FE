@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
-class RecomendPlantCard extends StatelessWidget {
-  const RecomendPlantCard(
+class RecommendPlantCard extends StatelessWidget {
+  const RecommendPlantCard(
       {Key key,
       this.image,
       this.title,
@@ -12,7 +12,8 @@ class RecomendPlantCard extends StatelessWidget {
       this.bottomPadding})
       : super(key: key);
 
-  final String image, title, country;
+  final Image image;
+  final String title, country;
   final int price;
   final Function press;
   final double bottomPadding;
@@ -28,9 +29,15 @@ class RecomendPlantCard extends StatelessWidget {
         bottom: this.bottomPadding,
       ),
       width: size.width * 0.4,
+      height: size.height*0.25,
       child: Column(
         children: <Widget>[
-          Image.asset(image),
+          Container(
+            width: size.width*0.4 - kDefaultPadding,
+            height: 90,
+            child:
+          image,
+          ),
           GestureDetector(
             onTap: press,
             child: Container(

@@ -3,17 +3,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plant_app/screens/properties/properties.dart';
 
 import '../../../constants.dart';
-import 'icon_card.dart';
 
 class ImageAndIcons extends StatelessWidget {
   const ImageAndIcons({
     Key key,
     this.image,
+    this.listRes,
+
     @required this.size,
   }) : super(key: key);
 
   final Size size;
   final String image;
+  final Map listRes;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class ImageAndIcons extends StatelessWidget {
                           context: context,
                           builder: (context) => CustomDialog(
                             title: "Light",
-                            des: "Description",
+                            des: listRes['light'].toString(),
                           ),
                         );
                       },
@@ -60,7 +62,7 @@ class ImageAndIcons extends StatelessWidget {
                           context: context,
                           builder: (context) => CustomDialog(
                             title: "Temperature",
-                            des: "Description",
+                            des: listRes['temperature'].toString(),
                           ),
                         );
                       },
@@ -72,7 +74,7 @@ class ImageAndIcons extends StatelessWidget {
                           context: context,
                           builder: (context) => CustomDialog(
                             title: "Humidity",
-                            des: "Description",
+                            des: listRes['humidity'].toString(),
                           ),
                         );
                       },
@@ -84,7 +86,7 @@ class ImageAndIcons extends StatelessWidget {
                           context: context,
                           builder: (context) => CustomDialog(
                             title: "Wind",
-                            des: "Description",
+                            des: listRes['wind'].toString(),
                           ),
                         );
                       },

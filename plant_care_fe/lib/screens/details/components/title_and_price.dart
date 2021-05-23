@@ -15,31 +15,38 @@ class TitleAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Row(
         children: <Widget>[
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "$title\n",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4
-                      .copyWith(color: kTextColor, fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text: country,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          Column(
+                    children: <Widget>[
+                        Container(
+                          width: size.width*0.8,
+                          child: Text(
+                          title,
+                          style: Theme.of(context).textTheme
+                          .headline5
+                          ,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        ),
+                        Container(
+                          width: size.width*0.8,
+                          child:
+                          Text(
+                          country,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                          fontSize: 20,
+                          color: kPrimaryColor.withOpacity(0.8),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        ),
+                      ],
+                    ),
           Spacer(),
           Text(
             "\$$price",
