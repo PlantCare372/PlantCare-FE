@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
 import 'package:plant_app/screens/home/home_screen.dart';
+import 'package:plant_app/screens/login/login.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'notification_service.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: Login(),//HomeScreen(),
     );
   }
 }
