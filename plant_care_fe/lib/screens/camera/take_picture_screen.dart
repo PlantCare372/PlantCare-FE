@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:plant_app/utils/loginCredentials.dart';
+
 import 'components/display_picture_screen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -87,11 +89,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
 Future<List<dynamic>> getPlantPrediction(String image) async {
   final Response res = await post(
-    Uri.parse('http://192.168.56.101/api/v1/detector/'),
+    Uri.parse('http://178.128.127.43/api/v1/detector/'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjIwOTg0MzQsInN1YiI6IjEifQ.DePTdoDHEGvlmMM8GjoAxZIDNunaQm3z1cs8uFUy9uE'
+      'Authorization': 'Bearer ${LoginCredentials.getToken()}'
     },
     body: jsonEncode(<String, String>{
       'b64image': image,
@@ -113,14 +114,7 @@ class PlantPrediction {
   final String description;
   final String image;
 
-  PlantPrediction(
-      {this.name,
-      this.prob,
-      this.google_image,
-      this.wikipedia,
-      this.id,
-      this.description,
-      this.image});
+  PlantPrediction({this.name, this.prob, this.google_image, this.wikipedia, this.id, this.description, this.image});
   // factory PlantPrediction.fromJson(Map<String, dynamic> json) {
   //   return PlantPrediction(
   //       name: json['name'],

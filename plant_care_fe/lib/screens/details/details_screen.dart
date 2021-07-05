@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
+import 'package:plant_app/utils/loginCredentials.dart';
 import './components/image_and_icons.dart';
 import './components/title_and_price.dart';
 import './components/description_box.dart';
@@ -20,12 +21,12 @@ class DetailsState extends State<DetailsScreen> {
   Map listRes;
   Future fetchData() async {
     Response res = await get(
-        Uri.parse('http://178.128.127.43/api/v1/plants/' + this.id),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization':
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjIwOTg0MzQsInN1YiI6IjEifQ.DePTdoDHEGvlmMM8GjoAxZIDNunaQm3z1cs8uFUy9uE'
-        });
+      Uri.parse('http://178.128.127.43/api/v1/plants/' + this.id),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ${LoginCredentials.getToken()}'
+      },
+    );
     if (res.statusCode == 200) {
       setState(() {
         listRes = json.decode(res.body);
@@ -51,15 +52,11 @@ class DetailsState extends State<DetailsScreen> {
                 ImageAndIcons(
                   listRes: listRes,
                   size: size,
-                  image: listRes['image'] == null
-                      ? 'assets/images/blank-tree.png'
-                      : listRes['image'].toString(),
+                  image: listRes['image'] == null ? 'assets/images/blank-tree.png' : listRes['image'].toString(),
                 ),
                 TitleAndPrice(
                   title: listRes['name'].toString(),
-                  country: listRes['country'] == null
-                      ? 'No country found'
-                      : listRes['country'].toString(),
+                  country: listRes['country'] == null ? 'No country found' : listRes['country'].toString(),
                   price: listRes['price'] == null ? 0 : listRes['price'],
                 ),
                 SizedBox(height: kDefaultPadding),
@@ -94,8 +91,7 @@ class DetailsState extends State<DetailsScreen> {
                                 return Description(
                                     title: listRes['name'],
                                     text: 'Description',
-                                    descriptions:
-                                        listRes['description'].toString());
+                                    descriptions: listRes['description'].toString());
                               });
                         },
                         child: Text("Description"),
