@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
+// import 'package:plant_app/screens/payment/payment.dart';
 import 'package:plant_app/utils/loginCredentials.dart';
 import './components/image_and_icons.dart';
 import './components/title_and_price.dart';
@@ -72,7 +73,9 @@ class DetailsState extends State<DetailsScreen> {
                           ),
                         ),
                         color: kPrimaryColor,
-                        onPressed: () {},
+                        onPressed: () {
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => Payment()));
+                        },
                         child: Text(
                           "Buy Now",
                           style: TextStyle(

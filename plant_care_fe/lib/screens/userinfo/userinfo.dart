@@ -3,7 +3,12 @@ import 'package:plant_app/constants.dart';
 
 import '../userinfo/components/body.dart';
 
-class UserInfo extends StatelessWidget {
+class UserInfo extends StatefulWidget {
+  @override
+  _UserInfoState createState() => _UserInfoState();
+}
+
+class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
