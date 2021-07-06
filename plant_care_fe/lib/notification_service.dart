@@ -47,7 +47,7 @@ class NotificationService {
         'scheduled body',
         tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
         const NotificationDetails(
-            android: AndroidNotificationDetails('your reminder id', 'your reminder name', 'your reminder description')),
+            android: AndroidNotificationDetails('your channel id', 'your channel name', 'your channel description')),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
