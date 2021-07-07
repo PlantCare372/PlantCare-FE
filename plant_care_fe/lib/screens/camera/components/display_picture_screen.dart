@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:plant_app/constants.dart';
+import 'package:plant_app/screens/camera/components/api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 launchURL(String url) async {
@@ -11,7 +14,7 @@ launchURL(String url) async {
   }
 }
 
-class DisplayPictureScreen extends StatelessWidget {
+class DisplayPictureScreen extends StatefulWidget {
   final String imagePath;
   final List<dynamic> list;
   const DisplayPictureScreen({
@@ -20,6 +23,10 @@ class DisplayPictureScreen extends StatelessWidget {
     this.imagePath,
   }) : super(key: key);
 
+  Display createState() => Display();
+}
+
+class Display extends State<DisplayPictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +36,7 @@ class DisplayPictureScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Image.file(
-            File(imagePath),
+            File(widget.imagePath),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 300,
             fit: BoxFit.fill,
@@ -44,8 +51,9 @@ class DisplayPictureScreen extends StatelessWidget {
               padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:
-                    list.map((detail) => PlantsDetail(e: detail)).toList(),
+                children: widget.list
+                    .map((detail) => PlantsDetail(e: detail))
+                    .toList(),
               ),
             ),
           ))
@@ -55,55 +63,88 @@ class DisplayPictureScreen extends StatelessWidget {
   }
 }
 
-class PlantsDetail extends StatelessWidget {
+class PlantsDetail extends StatefulWidget {
   final dynamic e;
-  const PlantsDetail({
+  PlantsDetail({
+    Key key,
     this.e,
-  });
+  }) : super(key: key);
+
+  @override
+  PlantsDetailState createState() => PlantsDetailState();
+}
+
+class PlantsDetailState extends State<PlantsDetail> {
+  bool favpress = true;
+  void favButton(int id) async {
+    var res = await addtofav(id);
+    print(res);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: <Widget>[
-        Text('Name : ${e['name']}'),
-        RichText(
-          text: new TextSpan(
-            children: [
-              new TextSpan(
-                text: 'Images: ',
-                style: new TextStyle(color: Colors.black),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Name : ${widget.e['name']}'),
+            RichText(
+              text: new TextSpan(
+                children: [
+                  new TextSpan(
+                    text: 'Images: ',
+                    style: new TextStyle(color: Colors.black),
+                  ),
+                  new TextSpan(
+                      text: 'Click here to view images',
+                      style: new TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchURL(widget.e['google_image']);
+                        }),
+                ],
               ),
-              new TextSpan(
-                  text: 'Click here to view images',
-                  style: new TextStyle(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      launchURL(e['google_image']);
-                    }),
-            ],
-          ),
-        ),
-        RichText(
-          text: new TextSpan(
-            children: [
-              new TextSpan(
-                text: 'Description: ',
-                style: new TextStyle(color: Colors.black),
+            ),
+            RichText(
+              text: new TextSpan(
+                children: [
+                  new TextSpan(
+                    text: 'Description: ',
+                    style: new TextStyle(color: Colors.black),
+                  ),
+                  new TextSpan(
+                      text: 'Click here to view detail',
+                      style: new TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchURL(widget.e['wikipedia']);
+                        }),
+                ],
               ),
-              new TextSpan(
-                  text: 'Click here to view detail',
-                  style: new TextStyle(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      launchURL(e['wikipedia']);
-                    }),
-            ],
-          ),
+            ),
+            Divider(
+              height: 20.0,
+            ),
+          ],
         ),
-        Divider(
-          height: 20.0,
-        )
+        Padding(
+          padding: EdgeInsets.all(kDefaultPadding),
+        ),
+        Center(
+          child: IconButton(
+              icon: favpress
+                  ? Icon(Icons.favorite_border)
+                  : Icon(Icons.favorite, color: Colors.red),
+              onPressed: () {
+                if (favpress) {
+                  favButton(widget.e['id']);
+                }
+                setState(() {
+                  favpress = false;
+                });
+              }),
+        ),
       ],
     );
   }
