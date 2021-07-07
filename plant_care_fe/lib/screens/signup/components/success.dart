@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:plant_app/constants.dart';
 
 class CustomDialog extends StatelessWidget {
