@@ -4,33 +4,28 @@ import '../../../constants.dart';
 import '../../../notification_service.dart';
 import '../../reminder/reminder_screen.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class FeaturedPlants extends StatelessWidget {
-  const FeaturedPlants({
+  FeaturedPlants({
     Key key,
   }) : super(key: key);
-
+  final List<String> featurePlant = <String>["assets/images/bottom_img_1.png", "assets/images/bottom_img_2.png"];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: <Widget>[
-          FeaturePlantCard(
-            image: "assets/images/bottom_img_1.png",
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ReminderScreen()));
-            },
-          ),
-          FeaturePlantCard(
-            image: "assets/images/bottom_img_2.png",
-            press: () {},
-          ),
-        ],
-      ),
+          children: featurePlant
+              .map(
+                (e) => FeaturePlantCard(
+                  image: e,
+                  press: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReminderScreen()));
+                  },
+                ),
+              )
+              .toList()),
     );
   }
 }

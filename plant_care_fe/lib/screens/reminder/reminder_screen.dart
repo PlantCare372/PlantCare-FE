@@ -22,20 +22,11 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
   void initState() {
     getReminder();
+    startTime();
     super.initState();
   }
 
   void startTime() async {
-    String newReminder = listRes[0]['detail_reminder_time'].toString().split("T")[0].toString() +
-        " " +
-        listRes[0]['detail_reminder_time'].toString().split("T")[1].toString();
-    int reminderTime = DateTime.parse(newReminder).millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch;
-    print(listRes[0]['detail_reminder_time'].toString().split("T")[1].toString());
-    reminderTime = reminderTime ~/ 1000;
-    print(reminderTime);
-    reminderTimeHour = (reminderTime ~/ 3600).toString();
-    reminderTimeMinute = ((reminderTime % 3600) ~/ 60).toString();
-    reminderTimeSeccond = ((reminderTime % 3600) % 60).toString();
     timer = await Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         if (int.parse(reminderTimeSeccond) >= 0) {
@@ -59,13 +50,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     reminderTimeHour = newreminderTimeHour.toString();
                   } else {
                     NotificationService().scheduleNotification();
+                    timer.cancel();
                   }
                 }
               }
             }
           }
-        } else
-          timer.cancel();
+        }
       });
     });
   }
@@ -88,6 +79,15 @@ class _ReminderScreenState extends State<ReminderScreen> {
     setState(() {
       listRes = json.decode(res.body);
     });
+    String newReminder = listRes[0]['detail_reminder_time'].toString().split("T")[0].toString() +
+        " " +
+        listRes[0]['detail_reminder_time'].toString().split("T")[1].toString();
+    int reminderTime = DateTime.parse(newReminder).millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch;
+    reminderTime = reminderTime ~/ 1000;
+    print(reminderTime);
+    reminderTimeHour = (reminderTime ~/ 3600).toString();
+    reminderTimeMinute = ((reminderTime % 3600) ~/ 60).toString();
+    reminderTimeSeccond = ((reminderTime % 3600) % 60).toString();
   }
 
   @override
@@ -110,7 +110,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                  await startTime();
+                  await addReminder();
                 },
                 child: Text("Add reminder for this plant"))
           ],
