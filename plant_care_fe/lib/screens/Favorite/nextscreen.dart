@@ -14,6 +14,11 @@ class NextScreen extends StatefulWidget {
 
 class _NextScreen extends State<NextScreen> {
   List fav;
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
 
   Future fetchData() async {
     Response res =
