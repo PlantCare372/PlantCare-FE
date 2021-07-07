@@ -45,7 +45,7 @@ class NotificationService {
         0,
         'scheduled title',
         'scheduled body',
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 2)),
         const NotificationDetails(
             android: AndroidNotificationDetails('your channel id', 'your channel name', 'your channel description')),
         androidAllowWhileIdle: true,
