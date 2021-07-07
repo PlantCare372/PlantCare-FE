@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:plant_app/utils/loginCredentials.dart';
 import 'package:stripe_sdk/stripe_sdk.dart';
 import 'package:stripe_sdk/stripe_sdk_ui.dart';
 import 'package:http/http.dart' as http;
 
 class StripePayment extends StatefulWidget {
-  StripePayment({Key key}) : super(key: key);
+  final int plantId;
+  StripePayment({Key key, this.plantId}) : super(key: key);
 
   @override
   _StripePaymentState createState() => _StripePaymentState();
@@ -18,8 +20,8 @@ class _StripePaymentState extends State<StripePayment> {
   final StripeCard card = StripeCard();
 
   final Stripe stripe = Stripe(
-    "pk_test_51JA8KZE7avB6EvajK94K7WOYlJ9pXxoWGnkH4yEQGOsDCcgESIT6scE0eZZvc3rUujZAKehhcYk6LnpRhlu7DF7S00SHzdZ5fF", //Your Publishable Key
-    stripeAccount: "acct_1JA8TU2QNSk8WjAB", //Merchant Connected Account ID. It is the same ID set on server-side.
+    "pk_test_51JAcKuLeFWZmxKREhYS5IAeJIVqFu2xlWdCBHScPHj61kA8nBfqFAdyeA1LwTwUgpYor2gdTFePD4rkE2RwloiQN00iU6rp7BA", //Your Publishable Key
+    stripeAccount: "acct_1JAcT2Elsb5ptiZL", //Merchant Connected Account ID. It is the same ID set on server-side.
     returnUrlForSca: "stripesdk://3ds.stripesdk.io", //Return URL for SCA
   );
 
@@ -75,6 +77,7 @@ class _StripePaymentState extends State<StripePayment> {
     }
 
     Map<String, dynamic> paymentIntentRes = await createPaymentIntent(stripeCard, customerEmail);
+    print(paymentIntentRes);
     String clientSecret = paymentIntentRes['client_secret'];
     String paymentMethodId = paymentIntentRes['payment_method'];
     String status = paymentIntentRes['status'];
@@ -100,6 +103,7 @@ class _StripePaymentState extends State<StripePayment> {
     try {
       paymentMethod = await stripe.api.createPaymentMethodFromCard(stripeCard);
       clientSecret = await postCreatePaymentIntent(customerEmail, paymentMethod['id']);
+      print(clientSecret);
       paymentIntentRes = await stripe.api.retrievePaymentIntent(clientSecret);
     } catch (e) {
       print("ERROR_CreatePaymentIntentAndSubmit: $e");
@@ -110,20 +114,26 @@ class _StripePaymentState extends State<StripePayment> {
 
   Future<String> postCreatePaymentIntent(String email, String paymentMethodId) async {
     print('gothere' + paymentMethodId);
-    String clientSecret;
+    var clientSecret;
     http.Response response = await http.post(
-      Uri.parse('http://178.128.127.43/api/v1/payment-intent/'),
+      Uri.parse('http://178.128.127.43/api/v1/users/payment/buy'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ${LoginCredentials.getToken()}'
       },
-      body: jsonEncode(<String, String>{
-        'email': email,
-        'payment_method_id': paymentMethodId,
+      body: jsonEncode(<String, dynamic>{
+        "email": "tranhoaichau.00@gmail.com",
+        "is_active": true,
+        "is_superuser": false,
+        "full_name": "string",
+        "payment_method_id": paymentMethodId,
+        "price": 100,
+        "plant_id": widget.plantId
       }),
     );
-    clientSecret = json.decode(response.body);
+    clientSecret = jsonDecode(response.body);
     print(clientSecret);
-    return clientSecret;
+    return clientSecret["client_secret"]["id"];
   }
 
   Future<Map<String, dynamic>> confirmPayment3DSecure(String clientSecret, String paymentMethodId) async {
@@ -143,7 +153,7 @@ class _StripePaymentState extends State<StripePayment> {
     //Define how to get this info.
     // -Ask to the customer through a textfield.
     // -Get it from firebase Account.
-    customerEmail = "alessandro.berti@me.it";
+    customerEmail = LoginCredentials.getEmail();
     return customerEmail;
   }
 

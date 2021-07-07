@@ -74,7 +74,9 @@ class DetailsState extends State<DetailsScreen> {
                         ),
                         color: kPrimaryColor,
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => StripePayment()));
+                          print(listRes);
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) => StripePayment(plantId: listRes["id"])));
                         },
                         child: Text(
                           "Buy Now",
